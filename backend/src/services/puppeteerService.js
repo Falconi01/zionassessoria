@@ -186,7 +186,6 @@ async function consultarBachilleratoMEC(bachillerato, fechaNacimiento = '') {
     );
 
     const status = isValidado ? 'VALIDADO' : 'NAO_VALIDADO';
-    
     console.log(isValidado ? '✅ Bachillerato validado!' : '❌ Bachillerato não validado');
 
     // Captura o HTML completo da página para gerar PDF depois (sem nova navegação)
@@ -196,10 +195,16 @@ async function consultarBachilleratoMEC(bachillerato, fechaNacimiento = '') {
     // Fecha o navegador
     await browser.close();
 
+    // Se não validado, força mensagem personalizada
+    let mensagemFinal = resultadoTexto.trim();
+    if (!isValidado) {
+      mensagemFinal = 'O documento submetido não está registrado no sistema de gestão acadêmica do MEC.';
+    }
+
     // Retorna o resultado SEM PDF (PDF gerado em rota separada)
     return {
       status,
-      mensagem: resultadoTexto.trim(),
+      mensagem: mensagemFinal,
       bachillerato,
       timestamp: new Date().toISOString(),
       htmlCompleto  // HTML para gerar PDF rapidamente depois

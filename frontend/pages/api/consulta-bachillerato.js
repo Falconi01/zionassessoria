@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   }
 
   // Backend Oracle Cloud (IP fixo como fallback)
-  const BACKEND_URL = process.env.BACKEND_URL || 'http://146.235.29.239:5000';
+  const BACKEND_URL = process.env.BACKEND_URL || 'http://72.60.138.94:5000';
   
   console.log('Proxy: Conectando ao backend:', BACKEND_URL);
 

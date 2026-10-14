@@ -36,6 +36,7 @@ async function gerarPDFDoHTML(htmlContent) {
       'Zion Assessoria'
     ];
     let htmlFiltrado = htmlContent;
+<<<<<<< HEAD
     textosIndesejados.forEach(texto => {
       // Remove elementos HTML inteiros que contenham o texto indesejado
       const elementRegex = new RegExp(`<([a-zA-Z]+)[^>]*>[^<]*${texto}[^<]*<\/\\1>`, 'gi');
@@ -44,6 +45,11 @@ async function gerarPDFDoHTML(htmlContent) {
       const textRegex = new RegExp(texto.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
       htmlFiltrado = htmlFiltrado.replace(textRegex, '');
     });
+=======
+    // Remove apenas o elemento <footer> e <div id="footer"> do HTML
+    htmlFiltrado = htmlFiltrado.replace(/<footer[\s\S]*?<\/footer>/gi, '');
+    htmlFiltrado = htmlFiltrado.replace(/<div[^>]*id=["']footer["'][^>]*>[\s\S]*?<\/div>/gi, '');
+>>>>>>> a5fd090 (Primeiro commit)
 
     browser = await puppeteer.launch({
       executablePath: CONFIG.CHROME_PATH,
